@@ -4,13 +4,15 @@ import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         User[] users = new User[] {
                 new User("Tom", "Cruise", (byte) 59),
                 new User("Иван", "Иванов", (byte) 0),
                 new User("アレクサンドル", "プシキン", (byte) 35),
-                new User("Jay", "Z", (byte) 20)
+                new User("Jay", "Z", (byte) 52)
         };
         UserService userService = new UserServiceImpl();
         userService.createUsersTable();
@@ -18,5 +20,11 @@ public class Main {
             userService.saveUser(user.getName(), user.getLastName(), user.getAge());
             System.out.printf("User с именем – %s добавлен в базу данных\n", user.getName());
         }
+        List<User> userList = userService.getAllUsers();
+        for (User user : userList) {
+            System.out.println(user);
+        }
+        userService.cleanUsersTable();
+        userService.dropUsersTable();
     }
 }
