@@ -8,9 +8,9 @@ public class Main {
     public static void main(String[] args) {
         User[] users = new User[] {
                 new User("Tom", "Cruise", (byte) 59),
-                new User("Иван", "Иванов", (byte) 255),
+                new User("Иван", "Иванов", (byte) 0),
                 new User("アレクサンドル", "プシキン", (byte) 35),
-                new User("", "", (byte) -1)
+                new User("Jay", "Z", (byte) 20)
         };
         UserService userService = new UserServiceImpl();
         userService.createUsersTable();

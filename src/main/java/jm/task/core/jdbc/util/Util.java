@@ -22,7 +22,7 @@ public class Util {
             );
         } catch (SQLException | IOException e) {
             System.err.println("Ошибка соединения с базой данных.");
-            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
         }
         return connection;
     }

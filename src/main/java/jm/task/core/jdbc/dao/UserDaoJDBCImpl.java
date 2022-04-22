@@ -16,13 +16,13 @@ public class UserDaoJDBCImpl implements UserDao {
         try (Statement statement = this.connection.createStatement()) {
             String sql = String.format("CREATE TABLE IF NOT EXISTS users (%s, %s, %s, %s)",
                     "id BIGINT PRIMARY KEY AUTO_INCREMENT",
-                    "name VARCHAR(20) NOT NULL",
-                    "lastname VARCHAR(20) NOT NULL",
+                    "name VARCHAR(20) NOT NULL CHECK (name LIKE '__%')",
+                    "lastname VARCHAR(20) NOT NULL CHECK (lastname != '')",
                     "age TINYINT UNSIGNED NOT NULL");
             statement.executeUpdate(sql);
         } catch (SQLException e) {
             System.err.println("Не удалось создать таблицу пользователей.");
-            System.err.println(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -31,7 +31,7 @@ public class UserDaoJDBCImpl implements UserDao {
             statement.executeUpdate("DROP TABLE IF EXISTS users");
         } catch (SQLException e) {
             System.err.println("Не удалось удалить таблицу пользователей.");
-            System.err.println(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -43,7 +43,7 @@ public class UserDaoJDBCImpl implements UserDao {
             prepared.executeUpdate();
         } catch (SQLException e) {
             System.err.printf("Не удалось сохранить пользователя - [%s, %s, %d]\n", name, lastName, age);
-            System.err.println(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -53,7 +53,7 @@ public class UserDaoJDBCImpl implements UserDao {
             prepared.executeUpdate();
         } catch (SQLException e) {
             System.err.printf("Не удалось удалить пользователя с id: %d\n", id);
-            System.err.println(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -67,7 +67,7 @@ public class UserDaoJDBCImpl implements UserDao {
             }
         } catch (SQLException e) {
             System.err.println("Не удалось получить ползователей.");
-            System.err.println(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
 
         return users;
@@ -78,7 +78,7 @@ public class UserDaoJDBCImpl implements UserDao {
             statement.executeUpdate("DELETE FROM users");
         } catch (SQLException e) {
             System.err.println("Не удалось очистить таблицу пользователей.");
-            System.err.println(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 }
