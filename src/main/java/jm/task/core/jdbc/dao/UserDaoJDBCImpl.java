@@ -22,7 +22,7 @@ public class UserDaoJDBCImpl implements UserDao {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
             System.err.println("Не удалось создать таблицу пользователей.");
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
     }
 
@@ -31,7 +31,7 @@ public class UserDaoJDBCImpl implements UserDao {
             statement.executeUpdate("DROP TABLE IF EXISTS users");
         } catch (SQLException e) {
             System.err.println("Не удалось удалить таблицу пользователей.");
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
     }
 
@@ -42,8 +42,8 @@ public class UserDaoJDBCImpl implements UserDao {
             prepared.setByte(3, age);
             prepared.executeUpdate();
         } catch (SQLException e) {
-            System.err.println("Не удалось сохранить пользователя.");
-            e.printStackTrace();
+            System.err.printf("Не удалось сохранить пользователя - [%s, %s, %d]\n", name, lastName, age);
+            System.err.println(e.getMessage());
         }
     }
 
@@ -52,8 +52,8 @@ public class UserDaoJDBCImpl implements UserDao {
             prepared.setLong(1, id);
             prepared.executeUpdate();
         } catch (SQLException e) {
-            System.err.println("Не удалось удалить пользователя.");
-            e.printStackTrace();
+            System.err.printf("Не удалось удалить пользователя с id: %d\n", id);
+            System.err.println(e.getMessage());
         }
     }
 
@@ -67,7 +67,7 @@ public class UserDaoJDBCImpl implements UserDao {
             }
         } catch (SQLException e) {
             System.err.println("Не удалось получить ползователей.");
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
 
         return users;
@@ -78,7 +78,7 @@ public class UserDaoJDBCImpl implements UserDao {
             statement.executeUpdate("DELETE FROM users");
         } catch (SQLException e) {
             System.err.println("Не удалось очистить таблицу пользователей.");
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
     }
 }
