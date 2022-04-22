@@ -1,5 +1,6 @@
 # Kata-JDBC-Hibernate
-Файл *connection.properties* необходим для соединения с базой данных.
+Файл `connection.properties` должен быть в корневой папке проекта, он необходим для соединения с базой данных.
+В корневой папке подготовлен пример этого файла — `example_connection.properties`.
 
 ### connection.properties:
 ```properties
