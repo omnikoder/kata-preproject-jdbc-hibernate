@@ -20,10 +20,7 @@ public class Main {
             userService.saveUser(user.getName(), user.getLastName(), user.getAge());
             System.out.printf("User с именем – %s добавлен в базу данных\n", user.getName());
         }
-        List<User> userList = userService.getAllUsers();
-        for (User user : userList) {
-            System.out.println(user);
-        }
+        userService.getAllUsers().forEach(System.out::println);
         userService.cleanUsersTable();
         userService.dropUsersTable();
     }

@@ -12,7 +12,8 @@ import java.util.Properties;
 public class Util {
     public static Connection connectToDatabase() {
         Properties connProps = new Properties();
-        Connection connection = null;
+        Connection connection;
+
         try (InputStream input = Files.newInputStream(Paths.get("connection.properties"))) {
             connProps.load(input);
             connection = DriverManager.getConnection(
@@ -21,9 +22,9 @@ public class Util {
                     connProps.getProperty("password")
             );
         } catch (SQLException | IOException e) {
-            System.err.println("Ошибка соединения с базой данных.");
-            throw new RuntimeException(e.getMessage());
+            throw new RuntimeException("Ошибка соединения с базой данных.\n" + e.getMessage());
         }
+
         return connection;
     }
 }
