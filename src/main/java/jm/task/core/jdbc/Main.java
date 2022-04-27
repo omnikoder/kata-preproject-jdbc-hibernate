@@ -14,6 +14,7 @@ public class Main {
                 new User("アレクサンドル", "プシキン", (byte) 35),
                 new User("Jay", "Z", (byte) 52)
         };
+
         UserService userService = new UserServiceImpl();
         userService.createUsersTable();
         for (User user : users) {
